@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
@@ -264,16 +265,188 @@ void setZeroes(vector<vector<int>> &matrix)
 }
 void setZeroes2(vector<vector<int>> &matrix)
 {
-    int a= 2;
-    cout << !a;
+    int r = matrix.size();
+    int c = matrix[0].size();
+    bool rowFlag = false, colFlag = false;
+    for (int i = 0; i < r; ++i)
+    {
+        if (!matrix[i][0])
+        {
+            colFlag = true;
+            break;
+        }
+    }
+    for (int i = 0; i < c; ++i)
+    {
+        if (!matrix[0][i])
+        {
+            rowFlag = true;
+            break;
+        }
+    }
+    for (int i = 1; i < r; ++i)
+    {
+        for (int j = 1; j < c; ++j)
+        {
+            if (!matrix[i][j])
+            {
+                matrix[i][0] = matrix[0][j] = 0;
+            }
+        }
+    }
+    for (int i = 1; i < r; ++i)
+    {
+        for (int j = 1; j < c; ++j)
+        {
+            if (!(matrix[i][0] && matrix[0][j]))
+            {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+    if (rowFlag)
+    {
+        for (int i = 0; i < c; ++i)
+        {
+            matrix[0][i] = 0;
+        }
+    }
+    if (colFlag)
+    {
+        for (int i = 0; i < r; ++i)
+        {
+            matrix[i][0] = 0;
+        }
+    }
+}
+
+// 387 leetcode   看题解了
+int firstUniqChar(string s)
+{
+    map<char, int> cmap;
+    for (const auto &c : s)
+    {
+        ++cmap[c];
+    }
+    for (int i = 0; i < s.size(); ++i)
+    {
+        if (cmap[s[i]] == 1)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int firstUniqChar2(string s)
+{
+    map<char, int> cmap;
+    for (int i = 0; i < s.size(); ++i)
+    {
+        if (cmap.find(s[i]) == cmap.end())
+        {
+            cmap[s[i]] = i;
+        }
+        else
+        {
+            cmap[s[i]] = -1;
+        }
+    }
+    for (int i = 0; i < s.size(); ++i)
+    {
+        if (cmap[s[i]] != -1)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+int firstUniqChar3(string s);
+
+// 383 d
+bool canConstruct(string ransomNote, string magazine)
+{
+    unordered_map<char, int> rmap;
+    for (const auto &c : ransomNote)
+    {
+        rmap[c]++;
+    }
+    for (const auto &c : magazine)
+    {
+        if (rmap.find(c) != rmap.end() && rmap[c] > 0)
+        {
+            rmap[c]--;
+        }
+    }
+    for (const auto &item : rmap)
+    {
+        if (item.second != 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+// 优化
+bool canConstruct2(string ransomNote, string magazine)
+{
+    if (ransomNote.size() > magazine.size())
+    {
+        return false;
+    }
+    int letter[26]{0};
+
+    for (const auto &c : magazine)
+    {
+        letter[c - 'a']++;
+    }
+    for (const auto &c : ransomNote)
+    {
+        if ((--letter[c - 'a']) < 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+// 242 leetcode
+bool isAnagram(string s, string t)
+{
+    if (s.size() != t.size())
+    {
+        return false;
+    }
+    int letter[26]{0};
+    for (const auto &c : s)
+    {
+        letter[c - 'a']++;
+    }
+    for (const auto &c : t)
+    {
+        if ((--letter[c - 'a']) < 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+// 官方排序法
+bool isAnagram2(string s, string t){
+    if(s.size()!=t.size())  return false;
+    sort(s.begin(),s.end());
+    sort(t.begin(),t.end());
+    return s==t;
 }
 
 
 
-
-void testAny(){
-    int a= 2;
-    cout << !a;
+void testAny()
+{
+    char a;
+    cout << a;
+    a++;
+    cout << a;
 }
 int main()
 {
