@@ -432,24 +432,197 @@ bool isAnagram(string s, string t)
     return true;
 }
 // 官方排序法
-bool isAnagram2(string s, string t){
-    if(s.size()!=t.size())  return false;
-    sort(s.begin(),s.end());
-    sort(t.begin(),t.end());
-    return s==t;
+bool isAnagram2(string s, string t)
+{
+    if (s.size() != t.size())
+        return false;
+    sort(s.begin(), s.end());
+    sort(t.begin(), t.end());
+    return s == t;
 }
 
+// lc 26
+int removeDuplicates(vector<int> &nums)
+{
+    size_t size = nums.size();
+    if (size == 1)
+    {
+        return 1;
+    }
+    int pb = 0;
+    for (size_t pf = 1; pf < nums.size(); ++pf)
+    {
+        if (nums[pb] != nums[pf])
+        {
+            nums[pb + 1] = nums[pf];
+            ++pb;
+        }
+    }
+    for (int i = 0; i < (size - pb - 1); ++i)
+    {
+        nums.pop_back();
+    }
+    return pb + 1;
+}
+// lc 122
+int maxProfit122(const vector<int> &prices)
+{
+    int part = 0;
+    size_t size = prices.size();
+    vector<int> seperator{0};
+    for (int i = 1; i < size; ++i)
+    {
+        if (prices[i] < prices[i - 1])
+        {
+            seperator.push_back(i);
+            auto backitem = seperator.end() - 1;
+            part += (prices[*backitem - 1] - prices[*(backitem - 1)]);
+        }
+    }
+    part += (prices[size - 1] - prices[*(seperator.end() - 1)]);
+    return part;
+}
 
+// lc189
+void myrotate(vector<int> &nums, int k)
+{
+    vector<int> temp(nums);
+    int size = nums.size();
+    k = k % (size);
+    for (int i = 0; i < size; ++i)
+    {
+        nums[(i + k) % size] = temp[i];
+    }
+}
+// way2
+void reversenums(vector<int> &nums, int begin, int end)
+{
+    for (int i = begin; i <= begin + (end - begin) / 2; ++i)
+    {
+        swap(nums[i], nums[begin + (end - i)]);
+    }
+}
+void myrotate2(vector<int> &nums, int k)
+{
+    int size = nums.size();
+    reversenums(nums, 0, size - 1);
+    reversenums(nums, 0, k % size - 1);
+    reversenums(nums, k % size, size - 1);
+}
+
+// lc 136
+int singleNumber(vector<int> &nums)
+{
+    int res = 0;
+    for (auto num : nums)
+    {
+        res ^= num;
+    }
+    return res;
+}
+// 排序后查找
+int singleNumber2(vector<int> &nums)
+{
+    // sort(nums.begin(), nums.end());
+}
+
+// 66
+vector<int> plusOne(vector<int> &digits)
+{
+    auto iter = digits.end() - 1;
+    while (iter != digits.begin() && (*iter) == 9)
+    {
+        *iter = 0;
+        --iter;
+    }
+    ++(*iter);
+    if ((*iter) == 10 && iter == digits.begin())
+    {
+        *iter = 0;
+        digits.insert(iter, 1);
+    }
+    return digits;
+}
+// 283lc  --myway-1
+void moveZeroes(vector<int> &nums)
+{
+    size_t size = nums.size();
+    for (size_t i = 0; i < size; ++i)
+    {
+        if (nums[i] == 0)
+        {
+            --size;
+            for (size_t j = i; j < size; ++j)
+            {
+                swap(nums[j], nums[j + 1]);
+            }
+            if (nums[i] == 0)
+                --i;
+        }
+    }
+}
+//  --myway-2
+void moveZeroes2(vector<int> &nums)
+{
+    size_t size = nums.size();
+    for (size_t i = 0; i < size;)
+    {
+        if (nums[i] == 0)
+        {
+            nums.erase(nums.begin() + i);
+            nums.push_back(0);
+            --size;
+        }
+        else
+        {
+            ++i;
+        }
+    }
+}
+//  --othersway 双指针
+// leftp 的 左边是符合要求的序列（即按原相对序列排序的非零数字序列）/
+// leftp总是指向需要覆盖的值，因为movep总是指向序列右边的第一个非零数字
+void moveZeroes3(vector<int> &nums)
+{
+    size_t size = nums.size();
+    int leftp = 0, movep = 0;
+    while (leftp < size)
+    {
+        /* code */
+        if (movep >= size)
+        {
+            nums[leftp++] = 0;
+        }
+        else if (nums[movep])
+        {
+            nums[leftp] = nums[movep];
+            ++leftp;
+        }
+        ++movep;
+    }
+}
+
+void testAny();
+void printVec(const vector<int> &);
+int main()
+{
+    vector<int> vec{0, 0, 1, 0, 0, 2, 9};
+    moveZeroes2(vec);
+    printVec(vec);
+    return 1;
+}
 
 void testAny()
 {
-    char a;
-    cout << a;
-    a++;
+    int i = 1;
+    int a = (i++) + i;
     cout << a;
 }
-int main()
+void printVec(const vector<int> &vec)
 {
-    testAny();
-    return 1;
+    for (auto num : vec)
+    {
+        cout << num << " ";
+    }
+    cout << endl;
 }
