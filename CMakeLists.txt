@@ -3,4 +3,6 @@ project(myLeetCode VERSION 0.1.0)
 
 add_executable(myLeetCode lc.cpp)
 
-add_executable(myniuke nk.cpp)
+add_executable(myniuke nk.cpp nk.h)
+
+add_executable(test test.cpp)

@@ -524,6 +524,7 @@ int singleNumber(vector<int> &nums)
 int singleNumber2(vector<int> &nums)
 {
     // sort(nums.begin(), nums.end());
+    return 1;
 }
 
 // 66
