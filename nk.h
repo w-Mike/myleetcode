@@ -13,6 +13,3 @@ struct TreeNode {
     struct TreeNode *right;
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 };
-void printVec(const std::vector<int> &vec);
-TreeNode *initTree(TreeNode *root);
-ListNode *initList(ListNode *head);
