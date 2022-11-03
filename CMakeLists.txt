@@ -5,4 +5,4 @@ add_executable(myLeetCode lc.cpp)
 
 add_executable(myniuke nk.cpp nk.h)
 
-add_executable(test test.cpp)
+add_executable(mytest test.cpp)

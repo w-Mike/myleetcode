@@ -35,7 +35,7 @@ ListNode *ReverseList(ListNode *pHead)
     return pHead;
 }
 
-//更好的题解  思路清晰
+// 更好的题解  思路清晰
 ListNode *ReverseList2(ListNode *pHead)
 {
     ListNode *prev = nullptr;
@@ -88,6 +88,41 @@ ListNode *reverseBetween(ListNode *head, int m, int n)
     return prevhead->next;
 }
 
+// BM3 链表中的节点每k个一组翻转
+// https://www.nowcoder.com/practice/b49c3dc907814e9bbfa8437c251b028e?tpId=295&tqId=722&ru=/exam/oj&qru=/ta/format-top101/question-ranking&sourceUrl=%2Fexam%2Foj
+ListNode *reverseKGroup(ListNode *head, int k)
+{
+    
+}
+
+// BM4 合并两个排序的链表
+// https://www.nowcoder.com/practice/d8b6b4358f774294a89de2a6ac4d9337?tpId=295&tqId=23267&ru=/exam/oj&qru=/ta/format-top101/question-ranking&sourceUrl=%2Fexam%2Foj
+ListNode *Merge(ListNode *pHead1, ListNode *pHead2)
+{
+    ListNode *dummy = new ListNode(-1);
+    ListNode *p = dummy;
+
+    while(pHead1 && pHead2)
+    {
+        if(pHead1 -> val < pHead2->val){
+            p->next = pHead1;
+            pHead1 = pHead1->next;
+        }else{
+            p->next = pHead2;
+            pHead2 = pHead2->next;
+        }
+        p = p->next;
+        p->next = nullptr;
+    }
+    if(pHead1)
+        p->next = pHead1;
+    else if(pHead2)
+        p->next = pHead2;
+    p = dummy->next;
+    delete dummy;
+    return p;
+}   
+
 // BM17: https://www.nowcoder.com/practice/d3df40bd23594118b57554129cadf47b?tpId=295&tqId=1499549&ru=/exam/oj&qru=/ta/format-top101/question-ranking&sourceUrl=%2Fexam%2Foj
 int search(vector<int> &nums, int target)
 {
@@ -116,7 +151,7 @@ int search(vector<int> &nums, int target)
 }
 
 // BM18 https://www.nowcoder.com/practice/abc3fe2ce8e146608e868a70efebf62e?tpId=295&tags=&title=&difficulty=0&judgeStatus=0&rp=0&sourceUrl=%2Fexam%2Foj
-//二维的二分查找
+// 二维的二分查找
 bool Find(int target, vector<vector<int>> array)
 {
     if (array.empty())
@@ -952,18 +987,16 @@ int minmumNumberOfHost(int n, vector<vector<int>> &startEnd)
 
 // BM97 旋转数组
 // https://www.nowcoder.com/practice/e19927a8fd5d477794dac67096862042?tpId=295&tqId=1024689&ru=/exam/oj&qru=/ta/format-top101/question-ranking&sourceUrl=%2Fexam%2Foj
-
 vector<int> solve(int n, int m, vector<int> &a)
 {
-    int offset = m%n;
-    if(!offset) return a;
-    reverse(a.begin(),a.end());
-    reverse(a.begin(),a.begin()+offset);
-    reverse(a.begin()+offset, a.end());
+    int offset = m % n;
+    if (!offset)
+        return a;
+    reverse(a.begin(), a.end());
+    reverse(a.begin(), a.begin() + offset);
+    reverse(a.begin() + offset, a.end());
     return a;
 }
-
-
 
 ListNode *initList(ListNode *head);
 TreeNode *initTree(TreeNode *root);
@@ -971,7 +1004,7 @@ void printVec(const vector<int> &vec);
 
 int main()
 {
-
+    cout << "123" << endl;
     return 1;
 }
 
