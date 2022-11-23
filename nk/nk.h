@@ -1,9 +1,21 @@
 #pragma once
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <unordered_map>
+#include <set>
+#include <unordered_set>
+#include <map>
+#include <stack>
+#include <numeric>
+#include <queue>
 using namespace std;
 
 #pragma region funcs
 
-struct Interval {
+struct Interval
+{
     int start;
     int end;
 
@@ -12,15 +24,18 @@ struct Interval {
     Interval(int s, int e) : start(s), end(e) {}
 };
 
-struct ListNode {
+struct ListNode
+{
     int val;
     struct ListNode *next;
 
-    ListNode(int x) : val(x), next(NULL) {
+    ListNode(int x) : val(x), next(NULL)
+    {
     }
 };
 
-struct TreeNode {
+struct TreeNode
+{
     int val;
     struct TreeNode *left;
     struct TreeNode *right;
@@ -28,10 +43,12 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 };
 
-ListNode *initList(ListNode *head) {
+ListNode *initList(ListNode *head)
+{
     int num = 5;
     ListNode *p = head;
-    while (num--) {
+    while (num--)
+    {
         ListNode *node = new ListNode(num);
         p->next = node;
         p = node;
@@ -39,7 +56,8 @@ ListNode *initList(ListNode *head) {
     return head;
 }
 
-TreeNode *initTree(TreeNode *root) {
+TreeNode *initTree(TreeNode *root)
+{
     root->val = 1;
     TreeNode *rleft = new TreeNode(2);
     root->left = rleft;
@@ -50,8 +68,10 @@ TreeNode *initTree(TreeNode *root) {
     return root;
 }
 
-void printVec(const vector<int> &vec) {
-    for (auto num: vec) {
+void printVec(const vector<int> &vec)
+{
+    for (auto num : vec)
+    {
         cout << num << " ";
     }
     cout << endl;

@@ -3,8 +3,4 @@ project(myLeetCode VERSION 0.1.0)
 
 add_executable(myLeetCode lc.cpp)
 
-add_executable(myniuke nk.cpp nkMain.cpp nk.h)
-
 add_executable(mytest test.cpp)
-
-#add_executable(jingdian, jingDian.cpp)
